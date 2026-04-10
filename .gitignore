@@ -1,0 +1,40 @@
+# Environmental variables
+.env
+conda*
+
+# Python
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+venv/
+.venv/
+env/
+
+# SQLite
+*.db
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Postgresql
+
+postgres_data/
+
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# DBT
+.user.*
+warehouse/target/
+dbt_packages/
+warehouse/package-lock.yml
+
+# Files
+data/
+*.csv
+*.json
