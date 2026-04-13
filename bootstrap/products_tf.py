@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 
+orders_df = pd.read_csv("data/ecommerce_dataset/orders.csv")
 df = pd.read_csv("data/ecommerce_dataset/products.csv")
 
-df["is_current"] = True
+df["updated_at"] = True
 
 prob_of_change = 0.2
 max_changes = 1
@@ -11,6 +12,9 @@ max_changes = 1
 rows = []
 
 for _, row in df.iterrows():
+    price = row["price"]
+    rating = row["rating"]
+    
     rows.append(row.to_dict())
 
     if np.random.rand() < prob_of_change:
