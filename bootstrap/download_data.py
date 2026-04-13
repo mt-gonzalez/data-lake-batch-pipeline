@@ -11,7 +11,7 @@ os.environ['KAGGLE_KEY'] = os.getenv('KAGGLE_API_KEY')
 
 def download_data():
     DATASET = "abhayayare/e-commerce-dataset"
-    TARGET_FILES = "./data/raw_files"
+    TARGET_FILES = "./data/ecommerce_dataset"
     OUTPUT_DIR = "./data"   # Relative to where the command is exec
 
     if os.path.exists(TARGET_FILES):
@@ -26,10 +26,10 @@ def download_data():
     api.dataset_download_files(DATASET, path=OUTPUT_DIR, unzip=False)
 
     with zipfile.ZipFile('data/e-commerce-dataset.zip', 'r') as zip_ref:
-        zip_ref.extract(member='ecommerce_dataset/orders.csv', path='data/raw_files')
-        zip_ref.extract(member='ecommerce_dataset/order_items.csv', path='data/raw_files')
-        zip_ref.extract(member='ecommerce_dataset/users.csv',  path='data/raw_files')
-        zip_ref.extract(member='ecommerce_dataset/products.csv', path='data/raw_files')
+        zip_ref.extract(member='ecommerce_dataset/orders.csv', path='data')
+        zip_ref.extract(member='ecommerce_dataset/order_items.csv', path='data')
+        zip_ref.extract(member='ecommerce_dataset/users.csv',  path='data')
+        zip_ref.extract(member='ecommerce_dataset/products.csv', path='data')
 
     if os.path.exists('data/e-commerce-dataset.zip'):
         os.remove('data/e-commerce-dataset.zip')
