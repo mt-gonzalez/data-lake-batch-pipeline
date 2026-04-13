@@ -8,6 +8,7 @@ df = pd.read_csv("data/ecommerce_dataset/users.csv")
 df["signup_date"] = pd.to_datetime(df["signup_date"])
 
 df["updated_at"] = df["signup_date"]
+df["updated_at"] = df["signup_date"]
 
 prob_of_change = 0.3
 max_changes = 3
@@ -24,7 +25,11 @@ for _, row in df.iterrows():
         for _ in range(n_changes):
             new_row = row.copy()
             
-            change_date = last_date + pd.Timedelta(days=np.random.randint(10, 180))
+            change_date = last_date + pd.Timedelta(
+                days=np.random.randint(10, 180),
+                seconds=np.random.randint(0, 86400),
+                microseconds=np.random.randint(0, 1_000_000)
+            )
             
             if np.random.rand() < 0.7: #greater prob of changing email
                 new_row["email"] = fake.email()
@@ -37,4 +42,4 @@ for _, row in df.iterrows():
             last_date = change_date
 
 scd_df = pd.DataFrame(rows)
-scd_df.to_csv("data/processed/users_processed.csv", index=False)
+scd_df.to_csv("data/processed/users_processed.csv", index=False, date_format="%Y-%m-%dT%H:%M:%S.%f")
