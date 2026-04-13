@@ -7,9 +7,7 @@ fake = Faker()
 df = pd.read_csv("data/ecommerce_dataset/users.csv")
 df["signup_date"] = pd.to_datetime(df["signup_date"])
 
-df["valid_from"] = df["signup_date"]
-df["valid_to"] = pd.NaT
-df["is_current"] = True
+df["updated_at"] = df["signup_date"]
 
 prob_of_change = 0.3
 max_changes = 3
@@ -32,13 +30,8 @@ for _, row in df.iterrows():
                 new_row["email"] = fake.email()
             else:
                 new_row["city"] = fake.city()
-
-            rows[-1]["valid_to"] = change_date
-            rows[-1]["is_current"] = False
             
-            new_row["valid_from"] = change_date
-            new_row["valid_to"] = pd.NaT
-            new_row["is_current"] = True
+            new_row["updated_at"] = change_date
             
             rows.append(new_row.to_dict())
             last_date = change_date
