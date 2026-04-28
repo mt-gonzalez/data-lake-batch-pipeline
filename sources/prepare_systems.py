@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 load_dotenv()
 POSTGRES_URL = os.getenv("POSTGRES_URL")
-SQLITE_URL = "sqlite:///./catalog.db"
+SQLITE_URL = "sqlite:///sources/api/catalog.db"
 
 
 def populate_postgres():
@@ -40,7 +40,6 @@ def populate_postgres():
 
 def populate_sqlite():
     engine = create_engine(SQLITE_URL)
-
 
     products = pd.read_csv("data/processed/products_processed.csv")
 
