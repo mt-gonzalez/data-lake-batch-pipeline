@@ -13,3 +13,6 @@ class ProductBase(BaseModel):
 class ProductResponse(BaseModel):
     data: List[ProductBase]
     next_cursor: Optional[str]
+    
+class Config:
+        from_attributes = True
