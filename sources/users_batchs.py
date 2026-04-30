@@ -5,13 +5,23 @@ df = pd.read_csv("data/processed/users_processed.csv")
 
 df["updated_at"] = pd.to_datetime(df["updated_at"])
 
-df["date"] = df["updated_at"].dt.date
+df["year"] = df["updated_at"].dt.year
+df["month"] = df["updated_at"].dt.month
+df["day"] = df["updated_at"].dt.day
 
-output_dir = "sources/users_snapshots"
-os.makedirs(output_dir, exist_ok=True)
+base_output_dir = "sources/users_snapshots"
 
-for date, group in df.groupby("date"):
-    file_path = f"{output_dir}/users_{date}.csv"
+for (year, month, day), group in df.groupby(["year", "month", "day"]):
+    
+    partition_path = (
+        f"{base_output_dir}/"
+        f"year={year}/month={month:02d}/day={day:02d}"
+    )
+    
+    os.makedirs(partition_path, exist_ok=True)
+    
+    file_path = f"{partition_path}/users.csv"
+    
     group.to_csv(file_path, index=False)
 
-print("Daily users records created")
+print("Users records partitioned by year/month/day")
