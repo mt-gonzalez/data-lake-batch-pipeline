@@ -9,7 +9,7 @@ df["year"] = df["updated_at"].dt.year
 df["month"] = df["updated_at"].dt.month
 df["day"] = df["updated_at"].dt.day
 
-base_output_dir = "sources/users_snapshots"
+base_output_dir = "sources/crm"
 
 for (year, month, day), group in df.groupby(["year", "month", "day"]):
     
