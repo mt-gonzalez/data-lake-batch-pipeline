@@ -3,10 +3,13 @@
 conda*
 
 # Python
+__pycache__/
 pycache/
 *.pyc
 *.pyo
 *.pyd
+
+
 
 venv/
 .venv/
@@ -35,6 +38,9 @@ dbt_packages/
 warehouse/package-lock.yml
 
 # Files
+sources/crm/
+*.csv
+
 data/
 *.csv
 *.json

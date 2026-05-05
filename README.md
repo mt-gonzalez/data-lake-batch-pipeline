@@ -30,9 +30,20 @@
 │   │   ├── products_schema.py
 │   │   └── catalog.db  # Sqlite db, not commited
 │   └── crm/
-│   │   ├── 2026-04-01/users.csv 
-│   │   ├── 2026-05-10/users.csv
-│   │   └── 2026-08-05/users.csv
+│   │   ├── year=2024/
+│   │   │   ├── month=01/
+│   │   │   │   ├── day=01/
+│   │   │   │   │   ├── users.csv   
+│   │   :   :
+│   │   :   :
+│   │   :   :
+│   │   ├── year=2027/
+│   │   │   ├── month=01/
+│   │   │   │   ├── day=01/
+│   │   │   │   │   ├── users.csv 
+│   │   │   :   :   
+│   │   :   :
+
 
 ```
 ## Upstream Data Modeling Strategy
@@ -96,13 +107,15 @@ These transformations aim to:
 
 ## Source System Data Preparation
 
-The original dataset was transformed into source-specific representations to simulate real-world upstream systems.
+The original dataset was transformed into source-specific representations to simulate realistic upstream data systems.
 
-Each source system requires a different data contract:
+Each source system exposes a different data contract and ingestion pattern:
 
-* **PostgreSQL (OLTP)**: transactional tables (`orders`, `order_items`) were structured with consistent primary/foreign keys and timestamps.
-* **API (Products)**: product data was preserved as a historical dataset, enabling incremental retrieval based on `updated_at`.
-* **CRM (Users)**: user data was partitioned into date-based batches, simulating periodic file exports.
+* **PostgreSQL (OLTP)**: transactional data (`orders`, `order_items`) is stored in a normalized relational schema with enforced primary and foreign keys, simulating an operational database.
+
+* **API (Products)**: product data is exposed via a REST API with cursor-based pagination, enabling incremental extraction based on (`updated_at`, `product_id`).
+
+* **File-based CRM (Users)**: user data is delivered as partitioned files organized by date (`year/month/day`), simulating periodic batch exports from external systems (e.g. CRM platforms). This pattern enables incremental ingestion via partition discovery.
 
 - SQLite was chosen for simplicity and portability
 - FastAPI was used to simulate an external service
