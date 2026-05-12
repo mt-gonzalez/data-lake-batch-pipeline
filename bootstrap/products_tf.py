@@ -34,11 +34,11 @@ for _, row in df.iterrows():
 
             if np.random.rand() < 0.7:
                 price_update = np.random.normal(0, 0.05)
-                price = np.round(price * (1 + price_update), 2)  # 🔑 update directo
+                price = np.round(price * (1 + price_update), 2)
                 new_row["price"] = price
             else:
                 delta = np.random.normal(0, 0.05)
-                rating = np.round(np.clip(rating + delta, 1, 5), 2)  # 🔑 update directo
+                rating = np.round(np.clip(rating + delta, 1, 5), 2)
                 new_row["rating"] = rating
 
             last_date = change_date
