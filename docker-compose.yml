@@ -35,6 +35,14 @@ services:
       - ./minio/data:/data
     command: server /data --console-address ":9001"
 
+  init-minio:
+    image: quay.io/minio/mc
+    depends_on:
+      - minio
+    volumes:
+      - ./infra:/infra
+    entrypoint: ["/bin/sh", "/infra/init.sh"]
+    
 networks:
   source_net:
 
