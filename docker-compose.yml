@@ -50,7 +50,7 @@ services:
       - "4040:4040"  #Spark UI
     working_dir: /opt/spark/jobs
     volumes:
-      - ./spark:/opt/spark/project
+      - ./spark-local:/opt/spark/project
     command: ["sleep", "infinity"]
 
 networks:
