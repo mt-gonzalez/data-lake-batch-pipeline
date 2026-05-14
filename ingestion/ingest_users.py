@@ -10,7 +10,7 @@ load_dotenv()
 def get_files_from_to(start_date, end_date):
     files = []
     
-    while start_date <= end_date:
+    while start_date < end_date:
         base = Path("sources/crm")
         date_path = (
             f"year={start_date.year}/" \
@@ -56,14 +56,14 @@ def read_and_write(files):
 
         s3.upload_file(
             to_upload,
-            "datalake-raw",
+            "datalake-bronze",
             f"raw/{s3_tag}/{file_name}"
         )
     
 
 if __name__ == "__main__":
-    start_date_string = "01/01/2024"
-    end_date_string = "05/01/2024"
+    start_date_string = "01/02/2024"    # Managed by Airflow
+    end_date_string = "01/03/2024"
     start_date = pd.to_datetime(start_date_string, dayfirst=True)
     end_date = pd.to_datetime(end_date_string, dayfirst=True)
 
