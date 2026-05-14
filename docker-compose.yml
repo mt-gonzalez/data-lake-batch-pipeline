@@ -42,7 +42,17 @@ services:
     volumes:
       - ./infra:/infra
     entrypoint: ["/bin/sh", "/infra/init.sh"]
-    
+
+  spark:
+    image: spark:3.5.8-scala2.12-java11-python3-ubuntu
+    container_name: spark-local
+    ports:
+      - "4040:4040"  #Spark UI
+    working_dir: /opt/spark/jobs
+    volumes:
+      - ./spark:/opt/spark/project
+    command: ["sleep", "infinity"]
+
 networks:
   source_net:
 
