@@ -9,6 +9,8 @@
 ├── conda-env.yaml # Conda environment for python tools
 ├── notebook.ipynb
 │
+├── docker-compose.yml
+│
 ├── bootstrap/  # Scripts to adjust data to get more realistic data for future SCD
 │   ├── download_data.py
 │   ├── products_tf.py
@@ -16,7 +18,25 @@
 │   ├── order_items_tf.py
 │   └── load_2_source.py
 │
-├── docker-compose.yml
+├── data/
+│   ├── ecommerce_dataset/
+│   │   ├── order_items.csv
+│   │   ├── orders.csv
+│   │   ├── products.csv
+│   │   └── users.csv
+│   │ 
+│   └── processed/
+│       ├── order_items_processed.csv
+│       ├── orders_processed.csv
+│       ├── products_processed.csv
+│       └── users_processed.csv
+│ 
+├── infra/
+│   ├── init.sh
+│   └── policies/
+│       ├── orch_policy.json
+│       ├── job_policy.json
+│       └── bi_policy.json
 │
 ├── sources/
 │   ├── prepare_systems.py  # Script to populate orders and catalog dbs
@@ -37,13 +57,37 @@
 │   │   :   :
 │   │   :   :
 │   │   :   :
-│   │   ├── year=2027/
-│   │   │   ├── month=01/
-│   │   │   │   ├── day=01/
-│   │   │   │   │   ├── users.csv 
-│   │   │   :   :   
-│   │   :   :
-
+│
+├── ingestion/
+│   ├── ingest_users.py
+│   ├── ingest_products.py
+│   ├── ingest_orders.py
+│   └── ingest_order_items.py
+│
+├── spark-app/
+│   ├──Dockerfile
+│   │
+│   ├── jobs/
+│   │   ├── users_bronze_to_silver.py
+│   │   ├── products_bronze_to_silver.py
+│   │   ├── orders_bronze_to_silver.py
+│   │   ├── order_items_bronze_to_silver.py
+│   │   └── gold_business_value.py
+│   │
+│   ├── common/
+│   │   ├── spark_session.py
+│   │   ├── schemas.py
+│   │   └── config.py
+│   │
+│   └── transfomrations/
+│       ├── users_tf.py
+│       ├── products_tf.py
+│       ├── orders_tf.py
+│       ├── order_items_tf.py
+│       └── scd2_tf.py
+│    
+│       
+├── airflow/
 
 ```
 ## Upstream Data Modeling Strategy
