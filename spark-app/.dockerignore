@@ -1,0 +1,22 @@
+__pycache__
+*.pyc
+
+#datasets
+data/
+
+#notebooks
+*.ipynb
+
+#local spark
+spark-warehouse/
+metastore_db/
+
+#secrets
+.env
+
+#git
+.git
+
+#IDE
+.vscode
+.idea
