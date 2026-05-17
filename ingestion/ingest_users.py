@@ -44,12 +44,11 @@ def read_and_write(files):
 
     for file in files:
         parts = file.parts
-        crm = parts[1]
         year = parts[2].replace("year=", "")
         month = parts[3].replace("month=", "")
         day = parts[4].replace("day=", "")
 
-        s3_tag = f"{crm}/users/year={year}/month={month}/day={day}"
+        s3_tag = f"users/year={year}/month={month}/day={day}"
         file_name = f"users_{year}{month}{day}.csv"
 
         to_upload = str(file)
