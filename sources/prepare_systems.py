@@ -43,7 +43,7 @@ def populate_sqlite():
 
     products = pd.read_csv("data/processed/products_processed.csv")
 
-    products.to_sql("products", engine, if_exists="replace", index=False)
+    products.to_sql("products", engine, if_exists="replace", index=True, index_label="row_id")
 
     print("SQLite seeded")
 
