@@ -2,7 +2,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql import types as T 
 
-def basic_schema_normalization(df: DataFrame) -> DataFrame :
+def basic_schema_normalization_users(df: DataFrame) -> DataFrame :
 
     df = df.na.drop(subset=["user_id", "updated_at"])
     df = df.withColumn("email", F.lower(F.col("email")))
