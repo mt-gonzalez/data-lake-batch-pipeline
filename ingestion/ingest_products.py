@@ -15,6 +15,8 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
 
+S3_ENDPOINT=os.getenv("S3_ENDPOINT")
+
 BASE_URL="http://localhost:8000"
 
 def wait_for_api() :
@@ -88,7 +90,7 @@ def parse_and_upload_data(products: dict, date_of_ingestion) :
     
     s3 = boto3.client(
         "s3",
-        endpoint_url="http://localhost:9000",
+        endpoint_url=S3_ENDPOINT,   # Change to localhost to connect locally
         aws_access_key_id=os.getenv("MINIO_ROOT_USER"),
         aws_secret_access_key=os.getenv("MINIO_ROOT_PASSWORD")
     )
@@ -102,7 +104,7 @@ def parse_and_upload_data(products: dict, date_of_ingestion) :
     s3.upload_file(
         file,
         bucket,
-        f"raw/products/up_to_{date_of_ingestion}.csv"
+        f"raw/products/source=sqlite_catalog/snapshot_{date_of_ingestion}.csv"
     )
 
 if __name__ == "__main__" :
