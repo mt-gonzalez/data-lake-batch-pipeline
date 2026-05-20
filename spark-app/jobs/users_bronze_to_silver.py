@@ -12,7 +12,7 @@ silver_path = f"s3a://{config.s3_silver}/staged/users"
 
 df = spark.read.csv(bronze_path, schema=users_schema)
 
-df = users_tf.basic_schema_normalization(df)
+df = users_tf.basic_schema_normalization_users(df)
 df = users_tf.dedup_users(df)
 df = scd2_tf.build_scd2(df, "user_id")
 
