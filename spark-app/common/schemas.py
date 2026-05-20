@@ -19,3 +19,21 @@ products_schema = T.StructType([
     T.StructField("price", T.DecimalType(18, 2), False),
     T.StructField("rating", T.DoubleType, True)
 ])
+
+orders_schema = T.StructType([
+    T.StructField("order_id", T.StringType, False),
+    T.StructField("user_id", T.StringType, False),
+    T.StructField("order_date", T.TimestampType, False),
+    T.StructField("order_status", T.StringType, False),
+    T.StructField("total_amount", T.DecimalType(18, 2), False)
+])
+
+order_items_schema = T.StructType([
+    T.StructField("order_item_id", T.StringType, False),
+    T.StructField("order_id", T.StringType, False),
+    T.StructField("product_id", T.StringType, False),
+    T.StructField("user_id", T.StringType, False),
+    T.StructField("quantity", T.IntegerType, False),
+    T.StructField("item_price", T.DecimalType(18, 2), False),
+    T.StructField("item_total", T.DecimalType(18, 2), False)
+])
