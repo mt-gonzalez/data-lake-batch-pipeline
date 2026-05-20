@@ -110,7 +110,7 @@ def parse_and_upload_data(products: dict, date_of_ingestion) :
 if __name__ == "__main__" :
 
     date_string = "01/02/2024"
-    date = pd.to_datetime(date_string)
+    date = pd.to_datetime(date_string).date()
 
     products = fetch_products()
 
