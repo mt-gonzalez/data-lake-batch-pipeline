@@ -25,11 +25,13 @@
 │   │   ├── products.csv
 │   │   └── users.csv
 │   │ 
-│   └── processed/
-│       ├── order_items_processed.csv
-│       ├── orders_processed.csv
-│       ├── products_processed.csv
-│       └── users_processed.csv
+│   ├── processed/
+│   │   ├── order_items_processed.csv
+│   │   ├── orders_processed.csv
+│   │   ├── products_processed.csv
+│   │   └── users_processed.csv
+│   │
+│   └── products/   # Path needed to save product data extracted from API
 │ 
 ├── infra/
 │   ├── init.sh
@@ -62,7 +64,7 @@
 │   ├── ingest_users.py
 │   ├── ingest_products.py
 │   ├── ingest_orders.py
-│   └── ingest_order_items.py
+│   └── ingest_orders_and_order_items.py
 │
 ├── spark-app/
 │   ├──Dockerfile
@@ -132,6 +134,8 @@ Product data was modified to include variations in price and rating over time, r
 Dynamic pricing strategies
 Changes in customer feedback
 
+**(may be inconsistencies in catalog updated_at dates with ingestion dates !)**
+
 ### Orders and Order Items
 
 To ensure data consistency:
@@ -180,7 +184,7 @@ These transformations ensure that each source behaves according to its real-worl
 
 Data ingestion is designed to simulate an incremental loading pattern, where new records are appended over time instead of replacing existing data.
 
-Each ingestion batch contains only new or updated records, identified by their `updated_at` timestamp, and is stored in date-partitioned directories in the Bronze layer.
+Each ingestion batch contains only new or updated records, identified by their `updated_at` timestamp, and is stored in date-partitioned directories in the Bronze layer **(except for products catalog, due to it's relative small size in each ingestion is intended to be added a snapshot of the whole catalog. It adds also historic records already added in previous loadings.)**.
 
 This approach reflects real-world ingestion patterns such as:
 
