@@ -8,7 +8,7 @@ def basic_schema_normalization_products(df: DataFrame) -> DataFrame :
     
     lower_cols = ["product_name", "category", "brand"]
     for col in lower_cols :
-        df = df.withColumn(col, F.lower(F.col(col)))
+        df = df.withColumn(col, F.lower(F.trim(F.col(col))))
 
     df = df.withColumn("updated_at", F.col("updated_at").cast(T.TimestampType()))
 
