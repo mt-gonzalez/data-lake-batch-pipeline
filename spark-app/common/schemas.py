@@ -9,3 +9,13 @@ users_schema = T.StructType([
     T.StructField("signup_date", T.DateType(), True),
     T.StructField("updated_at", T.TimestampType(), False)
 ])
+
+products_schema = T.StructType([
+    T.StructField("product_id", T.StringType(), False),
+    T.StructField("updated_at", T.TimestampType(), False),
+    T.StructField("product_name", T.StringType, False),
+    T.StructField("category", T.StringType, True),
+    T.StructField("brand", T.StringType, True),
+    T.StructField("price", T.DecimalType(18, 2), False),
+    T.StructField("rating", T.DoubleType, True)
+])
