@@ -131,8 +131,8 @@ if __name__ == "__main__" :
 
     start_date_string = "01-01-2024"
     end_date_string = "01-02-2024"
-    start_date = pd.to_datetime(start_date_string).date()
-    end_date = pd.to_datetime(end_date_string).date()  # DATE FORMATEA DE NUEVO A YYYY-MM-DD
+    start_date = pd.to_datetime(start_date_string, format="%d-%m-%Y").date()
+    end_date = pd.to_datetime(end_date_string, format="%d-%m-%Y").date()  # DATE FORMATEA DE NUEVO A YYYY-MM-DD
     logger.info(f"[END_DATE]: {end_date}")
 
 
